@@ -1,0 +1,76 @@
+services:
+  customers:
+    build:
+      context: /Users/shark/Projects/MicroservicesSample
+      dockerfile: Customers/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: customers
+    ports:
+    - published: 4000
+      target: 80
+    - published: 4001
+      target: 443
+    volumes:
+    - /Users/shark/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/shark/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+  orders:
+    build:
+      context: /Users/shark/Projects/MicroservicesSample
+      dockerfile: Orders/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: orders
+    ports:
+    - published: 5000
+      target: 80
+    - published: 5001
+      target: 443
+    volumes:
+    - /Users/shark/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/shark/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+  products:
+    build:
+      context: /Users/shark/Projects/MicroservicesSample
+      dockerfile: Products/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: products
+    ports:
+    - published: 6000
+      target: 80
+    - published: 6001
+      target: 443
+    volumes:
+    - /Users/shark/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/shark/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+  shoppings:
+    build:
+      context: /Users/shark/Projects/MicroservicesSample
+      dockerfile: Shoppings/Dockerfile
+    depends_on:
+      customers:
+        condition: service_started
+      orders:
+        condition: service_started
+      products:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CUSTOMERS: http://customers:80
+      ORDERS: http://orders:80
+      PRODUCTS: http://products:80
+    image: shoppings
+    ports:
+    - published: 7000
+      target: 80
+    - published: 7001
+      target: 443
+    volumes:
+    - /Users/shark/.aspnet/https:/root/.aspnet/https:ro
+    - /Users/shark/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{A5B36C7D-B8F4-4328-A9EA-6E86060E238E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shoppings/Controllers/ShopController.cs">
+    <Files>
+      <File FileName="Customers/Controllers/CustomerController.cs" Line="87" Column="10" />
+      <File FileName="Shoppings/Controllers/ShopController.cs" Line="55" Column="42" />
+      <File FileName="Shoppings/Services/Products.cs" Line="19" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MicroservicesSample" expanded="True">
+            <Node name="Services" expanded="True">
+              <Node name="Orders" expanded="True">
+                <Node name="Controllers" expanded="True" />
+                <Node name="Models" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="WebApps" expanded="True" />
+            <Node name="docker-compose" expanded="True">
+              <Node name="docker-compose.yml" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.WebApps.Shoppings PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.Customers PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Services.Orders PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Services.Products PreferredExecutionTarget="/Applications/Safari.app" />
+</Properties>
