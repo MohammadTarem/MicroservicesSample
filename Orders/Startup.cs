@@ -9,9 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Repositoo;
 using Orders.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Orders
 {
@@ -35,6 +39,12 @@ namespace Orders
                     new InMemoryOperations<string, Order>(o => o.Id)
                 )
             );
+
+            services.AddHealthChecks()
+                .AddCheck<OrdersHealthChecks>("Orders API")
+                .AddCheck<OrdersRepositoryHealthChecks>("Orders Repository");
+
+
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, OrdersRepository orders)
@@ -46,6 +56,8 @@ namespace Orders
 
             //app.UseHttpsRedirection();
 
+            
+
             SeedRepository(orders);
 
             app.UseRouting();
@@ -55,6 +67,11 @@ namespace Orders
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //endpoints.MapHealthChecks("/hc");
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                     ResponseWriter = HealthCheckResponse
+                });
             });
         }
 
@@ -101,6 +118,27 @@ namespace Orders
 
             orders.Add(order1);
             orders.Add(order2);
+
+        }
+
+        private Task HealthCheckResponse(HttpContext httpContext, HealthReport healthReport)
+        {
+
+            JArray result = new JArray();
+
+            foreach (var e in healthReport.Entries)
+            {
+                var jObj = new JObject();
+                jObj.Add("serviceName", e.Key);
+                jObj.Add("state", e.Value.Status.ToString());
+                result.Add(jObj);
+
+
+            }
+            httpContext.Response.StatusCode = 200;
+            httpContext.Response.ContentType = "application/json";
+            return httpContext.Response.WriteAsync(JsonConvert.SerializeObject(result));
+
 
         }
 
