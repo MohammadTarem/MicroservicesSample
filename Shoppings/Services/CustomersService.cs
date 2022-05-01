@@ -37,9 +37,10 @@ namespace Shoppings.Services
                 }
 
             }
-            
-
 
         }
+
+        public async Task GetErrorAsync() => await http.GetStringAsync($"api/v1/customer/error");
+        
     }
 }

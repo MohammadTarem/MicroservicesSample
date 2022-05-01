@@ -12,6 +12,7 @@
     <None Remove="Repositoo" />
     <None Remove="Controllers\" />
     <None Remove="DTOs\" />
+    <None Remove="Polly" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

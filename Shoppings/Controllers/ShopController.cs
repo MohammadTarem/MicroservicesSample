@@ -55,6 +55,14 @@ namespace Shoppings.Controllers
             return new JsonResult(order);
         }
 
+        [HttpGet("error")]
+        public async Task<IActionResult> GetError()
+        {
+            await customers.GetErrorAsync();
+
+            return Ok();
+        }
+
 
     }
 }

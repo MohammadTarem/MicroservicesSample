@@ -13,6 +13,9 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Models\" />
+    <None Remove="Polly" />
+    <None Remove="Microsoft.Extensions.Http.Polly" />
+    <None Remove="Polly.Contrib.WaitAndRetry" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -22,5 +25,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.3" />
+    <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
   </ItemGroup>
 </Project>

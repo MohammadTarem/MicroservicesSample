@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Customers.Controllers;
 using Customers.Models;
-
+using Microsoft.Extensions.Logging;
 
 namespace Customers.Controllers
 {
@@ -11,9 +11,11 @@ namespace Customers.Controllers
     public class CustomerController : ControllerBase
     {
         private CustomerRepository customers;
+        
         public CustomerController(CustomerRepository repo)
         {
             customers = repo;
+            
         }
 
         [HttpGet("{id}")]
@@ -86,6 +88,14 @@ namespace Customers.Controllers
 
         }
 
+        [HttpGet("error")]
+        public IActionResult ReturnError()
+        {
+            
+            System.Diagnostics.Debug.WriteLine($"Error 500 has been generated.");
+            return StatusCode(500);
+
+        }
 
     }
 }
